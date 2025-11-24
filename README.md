@@ -1,44 +1,18 @@
-# Hide My Applist
+# Hide My Location
 
-[![Stars](https://img.shields.io/github/stars/Dr-TSNG/Hide-My-Applist?label=Stars)](https://github.com/Dr-TSNG)
-[![Crowdin](https://badges.crowdin.net/hide-my-applist/localized.svg)](https://crowdin.com/project/hide-my-applist)
-[![Build](https://img.shields.io/github/actions/workflow/status/Dr-TSNG/Hide-My-Applist/main.yml?branch=master&logo=github)](https://github.com/Dr-TSNG/Hide-My-Applist/actions)
-[![Release](https://img.shields.io/github/v/release/Dr-TSNG/Hide-My-Applist?label=Release)](https://github.com/Dr-TSNG/Hide-My-Applist/releases/latest)
-[![Download](https://img.shields.io/github/downloads/Dr-TSNG/Hide-My-Applist/total)](https://github.com/Dr-TSNG/Hide-My-Applist/releases/latest)
-[![Channel](https://img.shields.io/badge/Telegram-Channel-blue.svg?logo=telegram)](https://t.me/HideMyApplist)
-[![License](https://img.shields.io/github/license/Dr-TSNG/Hide-My-Applist?label=License)](https://choosealicense.com/licenses/gpl-3.0/)
+## 关于该模块
+TODO
 
-![banner](banner.png)
+## 版权声明
 
-- English  
-- [中文（简体）](README_zh_CN.md)
+以下条件现适用：
 
-## About this module
+1. **禁止修改**：不得以任何方式修改软件。这包括但不限于更改、添加或删除软件的任何部分代码或功能。
 
-Although it's bad practice to detect the installation of specific apps, not every app using root provides random package name support. In this case, if apps related to root (such as Fake Location and Storage Isolation) are detected, it is tantamount to detecting that the device is rooted.
+2. **禁止再分发**：不得以任何形式再分发软件。这包括但不限于重新命名、销售或将软件作为其他项目的一部分。
 
-Additionally, some apps use various loopholes to acquire your app list, in order to use it as fingerprinting data or for other nefarious purposes.
+3. **禁止不注明出处的摘取**：不得提取软件的任何部分、片段或组件并提交到其他项目中，除非以合适方式注明出处。这包括但不限于代码片段、函数和已发布的二进制文件。
 
-This module can work as an Xposed module to hide apps or reject app list requests, and provides some methods to test whether you have hidden your app list properly.
+4. **禁止声称继承**：在许可证变更之前创建的任何软件分支均不得声称是该项目的官方或非官方继承者。这包括但不限于使用项目的名称、品牌或声誉来暗示与原项目的关联。
 
-## Copyright Notice
-
-Copyright © 2025 HMA developers. All rights reserved.
-
-The software Hide My Applist, starting from version v3.4, is no longer under the AGPL-3.0 License. Instead, certain rights to the software are reserved by the owner.
-
-The following conditions now apply:
-
-1. **No Modifications**: The software may not be modified in any way. This includes but is not limited to changing, adding, or removing any part of the software's code or functionality.
-
-2. **No Redistribution**: The software may not be redistributed in any form. This includes but is not limited to renaming, selling, or including the software as part of another project.
-
-3. **No Picking without Credit**: No parts, pieces, or components of the software may be extracted and submitted to other projects without proper credit. This includes, but is not limited to, code snippets, functions, and released binaries.
-
-4. **No Claim to Succession**: Any fork of the software that was created before the license change may not claim to be an official or unofficial successor to the project. This includes but is not limited to using the project's name, branding, or reputation to imply a connection to the original project.
-
-## Translation Contributing
-You can contribute translation [here](https://crowdin.com/project/hide-my-applist).
-
-## Update Log
-[Reference to the release page](https://github.com/Dr-TSNG/Hide-My-Applist/releases)  
+## 更新日志
