@@ -122,6 +122,84 @@ object ConfigManager {
         saveConfig()
     }
 
+    // New methods for template location and network parameters
+    fun getTemplateLongitude(name: String): String? {
+        return config.templates[name]?.longitude
+    }
+
+    fun setTemplateLongitude(name: String, value: String) {
+        config.templates[name]?.let { template ->
+            config.templates[name] = template.copy(longitude = value)
+            saveConfig()
+        }
+    }
+
+    fun getTemplateLatitude(name: String): String? {
+        return config.templates[name]?.latitude
+    }
+
+    fun setTemplateLatitude(name: String, value: String) {
+        config.templates[name]?.let { template ->
+            config.templates[name] = template.copy(latitude = value)
+            saveConfig()
+        }
+    }
+
+    fun getTemplateEciNci(name: String): String? {
+        return config.templates[name]?.eciNci
+    }
+
+    fun setTemplateEciNci(name: String, value: String) {
+        config.templates[name]?.let { template ->
+            config.templates[name] = template.copy(eciNci = value)
+            saveConfig()
+        }
+    }
+
+    fun getTemplatePci(name: String): String? {
+        return config.templates[name]?.pci
+    }
+
+    fun setTemplatePci(name: String, value: String) {
+        config.templates[name]?.let { template ->
+            config.templates[name] = template.copy(pci = value)
+            saveConfig()
+        }
+    }
+
+    fun getTemplateTac(name: String): String? {
+        return config.templates[name]?.tac
+    }
+
+    fun setTemplateTac(name: String, value: String) {
+        config.templates[name]?.let { template ->
+            config.templates[name] = template.copy(tac = value)
+            saveConfig()
+        }
+    }
+
+    fun getTemplateEarfcnNrarfcn(name: String): String? {
+        return config.templates[name]?.earfcnNrarfcn
+    }
+
+    fun setTemplateEarfcnNrarfcn(name: String, value: String) {
+        config.templates[name]?.let { template ->
+            config.templates[name] = template.copy(earfcnNrarfcn = value)
+            saveConfig()
+        }
+    }
+
+    fun getTemplateBandwidth(name: String): String? {
+        return config.templates[name]?.bandwidth
+    }
+
+    fun setTemplateBandwidth(name: String, value: String) {
+        config.templates[name]?.let { template ->
+            config.templates[name] = template.copy(bandwidth = value)
+            saveConfig()
+        }
+    }
+
     fun isHideEnabled(packageName: String): Boolean {
         return config.scope.containsKey(packageName)
     }

@@ -42,11 +42,8 @@ class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
 
-        binding.newBlacklistTemplate.setOnClickListener {
+        binding.newTemplate.setOnClickListener {
             navigateToSettings(ConfigManager.TemplateInfo(null, false))
-        }
-        binding.newWhitelistTemplate.setOnClickListener {
-            navigateToSettings(ConfigManager.TemplateInfo(null, true))
         }
         binding.templateList.layoutManager = LinearLayoutManager(context)
         binding.templateList.adapter = adapter
@@ -57,10 +54,28 @@ class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
             fun deal() {
                 var name = bundle.getString("name")
                 val appliedList = bundle.getStringArrayList("appliedList")!!
-                val targetList = bundle.getStringArrayList("targetList")!!
+                // Get new fields
+                val longitude = bundle.getString("longitude")
+                val latitude = bundle.getString("latitude")
+                val eciNci = bundle.getString("eciNci")
+                val pci = bundle.getString("pci")
+                val tac = bundle.getString("tac")
+                val earfcnNrarfcn = bundle.getString("earfcnNrarfcn")
+                val bandwidth = bundle.getString("bandwidth")
+                
                 if (info.name == null) { // New template
                     if (name.isNullOrEmpty()) return
-                    ConfigManager.updateTemplate(name, JsonConfig.Template(info.isWhiteList, targetList.toSet()))
+                    ConfigManager.updateTemplate(name, JsonConfig.Template(
+                        isWhitelist = info.isWhiteList,
+                        appList = emptySet(), // No target apps anymore
+                        longitude = longitude,
+                        latitude = latitude,
+                        eciNci = eciNci,
+                        pci = pci,
+                        tac = tac,
+                        earfcnNrarfcn = earfcnNrarfcn,
+                        bandwidth = bandwidth
+                    ))
                     ConfigManager.updateTemplateAppliedApps(name, appliedList)
                 } else {                 // Existing template
                     if (name == null) {
@@ -68,7 +83,19 @@ class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
                     } else {
                         if (name.isEmpty()) name = info.name
                         if (name != info.name) ConfigManager.renameTemplate(info.name, name)
-                        ConfigManager.updateTemplate(name, JsonConfig.Template(info.isWhiteList, targetList.toSet()))
+                        // Get existing template to preserve appList
+                        val existingTemplate = ConfigManager.getTemplateTargetAppList(info.name)
+                        ConfigManager.updateTemplate(name, JsonConfig.Template(
+                            isWhitelist = info.isWhiteList,
+                            appList = existingTemplate.toSet(), // Preserve existing appList
+                            longitude = longitude,
+                            latitude = latitude,
+                            eciNci = eciNci,
+                            pci = pci,
+                            tac = tac,
+                            earfcnNrarfcn = earfcnNrarfcn,
+                            bandwidth = bandwidth
+                        ))
                         ConfigManager.updateTemplateAppliedApps(name, appliedList)
                     }
                 }
@@ -79,7 +106,6 @@ class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
         }
 
         val args = TemplateSettingsFragmentArgs(info.name, info.isWhiteList)
-        val extras = FragmentNavigatorExtras(binding.hintCard to "transition_manage")
-        navController.navigate(R.id.nav_template_settings, args.toBundle(), null, extras)
+        navController.navigate(R.id.nav_template_settings, args.toBundle())
     }
 }

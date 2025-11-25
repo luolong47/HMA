@@ -22,7 +22,14 @@ data class JsonConfig(
     @Serializable
     data class Template(
         val isWhitelist: Boolean,
-        val appList: Set<String>
+        val appList: Set<String>,
+        val longitude: String? = null,
+        val latitude: String? = null,
+        val eciNci: String? = null,
+        val pci: String? = null,
+        val tac: String? = null,
+        val earfcnNrarfcn: String? = null,
+        val bandwidth: String? = null
     ) {
         override fun toString() = encoder.encodeToString(this)
     }

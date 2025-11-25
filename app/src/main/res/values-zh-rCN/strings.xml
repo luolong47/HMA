@@ -59,11 +59,16 @@
     <string name="list_sort_by_install_time">按安装时间</string>
     <string name="list_sort_by_update_time">按更新时间</string>
     <!-- Template manage -->
-    <string name="template_usage_hint">为“不安分”的应用建立模板，控制可获取的应用列表。\n\n黑名单（推荐）：模板中选中的应用对应用模板的应用不可见。\n白名单：模板中未选中的应用对应用模板的应用不可见。</string>
-    <string name="template_new_blacklist">创建黑名单模板</string>
-    <string name="template_new_whitelist">创建白名单模板</string>
+    <string name="template_new">创建模板</string>
     <string name="template_delete">你确定要删除此模板吗？</string>
     <string name="template_name">模板名称</string>
+    <string name="template_longitude">经度</string>
+    <string name="template_latitude">纬度</string>
+    <string name="template_eci_nci">ECI/NCI</string>
+    <string name="template_pci">PCI</string>
+    <string name="template_tac">TAC</string>
+    <string name="template_earfcn_nrarfcn">EARFCN/NRARFCN</string>
+    <string name="template_bandwidth">带宽</string>
     <string name="template_name_invalid">名称无效</string>
     <string name="template_delete_title">删除模板</string>
     <string name="template_name_already_exist">模板名称已存在</string>
@@ -115,7 +120,7 @@
     <string name="settings_stop_system_service">停止系统服务</string>
     <string name="settings_stop_system_service_summary">需要重启设备才能再次启动系统服务</string>
     <string name="settings_is_clean_env">同时清理运行环境？</string>
-    <string name="settings_is_clean_env_summary">删除 /data/misc/hide_my_applist_* 中的系统服务缓存。这意味着你需要在下次重启后手动启动一次模块应用，以便启用拦截，同时拦截次数也将被清理。</string>
+    <string name="settings_is_clean_env_summary">删除 /data/misc/afucklocation* 中的系统服务缓存。这意味着你需要在下次重启后手动启动一次模块应用，以便启用拦截，同时拦截次数也将被清理。</string>
     <string name="settings_force_clean_env">强制清理运行环境（root）</string>
     <string name="settings_force_clean_env_summary">只有在系统服务无法启动的情况下才应使用，否则请使用上面的选项。</string>
     <string name="settings_force_clean_env_toast_successful">运行环境已清理</string>

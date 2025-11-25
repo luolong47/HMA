@@ -39,12 +39,103 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <aaa.fucklocation.ui.view.ListItemView
-            android:id="@+id/target_apps"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:buttonText="@string/edit_list"
-            app:icon="@drawable/baseline_apps_24" />
+            android:layout_marginVertical="5dp"
+            android:hint="@string/template_longitude"
+            android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/template_longitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal|numberSigned" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:hint="@string/template_latitude"
+            android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/template_latitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal|numberSigned" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:hint="@string/template_eci_nci"
+            android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/template_eci_nci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:hint="@string/template_pci"
+            android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/template_pci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:hint="@string/template_tac"
+            android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/template_tac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:hint="@string/template_earfcn_nrarfcn"
+            android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/template_earfcn_nrarfcn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:hint="@string/template_bandwidth"
+            android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/template_bandwidth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <aaa.fucklocation.ui.view.ListItemView
             android:id="@+id/applied_apps"

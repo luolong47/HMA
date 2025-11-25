@@ -51,7 +51,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
 
     private fun searchDataDir() {
         File("/data/system").list()?.forEach {
-            if (it.startsWith("hide_my_applist")) {
+            if (it.startsWith("afucklocation")) {
                 if (!this::dataDir.isInitialized) {
                     val newDir = File("/data/misc/$it")
                     File("/data/system/$it").renameTo(newDir)
@@ -62,7 +62,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             }
         }
         File("/data/misc").list()?.forEach {
-            if (it.startsWith("hide_my_applist")) {
+            if (it.startsWith("afucklocation")) {
                 if (!this::dataDir.isInitialized) {
                     dataDir = "/data/misc/$it"
                 } else if (dataDir != "/data/misc/$it") {
@@ -71,7 +71,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             }
         }
         if (!this::dataDir.isInitialized) {
-            dataDir = "/data/misc/hide_my_applist_" + Utils.generateRandomString(16)
+            dataDir = "/data/misc/afucklocation_" + Utils.generateRandomString(16)
         }
 
         File("$dataDir/log").mkdirs()

@@ -47,7 +47,14 @@ class TemplateSettingsFragment : Fragment(R.layout.fragment_template_settings) {
         setFragmentResult("template_settings", Bundle().apply {
             putString("name",if (delete) null else viewModel.name)
             putStringArrayList("appliedList", viewModel.appliedAppList.value)
-            putStringArrayList("targetList", viewModel.targetAppList.value)
+            // Add new fields
+            putString("longitude", viewModel.longitude)
+            putString("latitude", viewModel.latitude)
+            putString("eciNci", viewModel.eciNci)
+            putString("pci", viewModel.pci)
+            putString("tac", viewModel.tac)
+            putString("earfcnNrarfcn", viewModel.earfcnNrarfcn)
+            putString("bandwidth", viewModel.bandwidth)
         })
         navController.navigateUp()
     }
@@ -75,17 +82,29 @@ class TemplateSettingsFragment : Fragment(R.layout.fragment_template_settings) {
 
         binding.templateName.setText(viewModel.name)
         binding.templateName.addTextChangedListener { viewModel.name = it.toString() }
-        binding.targetApps.setOnClickListener {
-            setFragmentResultListener("app_select") { _, bundle ->
-                viewModel.targetAppList.value = bundle.getStringArrayList("checked")!!
-                clearFragmentResultListener("app_select")
-            }
-            val args = ScopeFragmentArgs(
-                filterOnlyEnabled = false,
-                checked = viewModel.targetAppList.value.toTypedArray()
-            )
-            navController.navigate(R.id.nav_scope, args.toBundle())
-        }
+        
+        // Setup new input fields
+        binding.templateLongitude.setText(viewModel.longitude)
+        binding.templateLongitude.addTextChangedListener { viewModel.longitude = it.toString() }
+        
+        binding.templateLatitude.setText(viewModel.latitude)
+        binding.templateLatitude.addTextChangedListener { viewModel.latitude = it.toString() }
+        
+        binding.templateEciNci.setText(viewModel.eciNci)
+        binding.templateEciNci.addTextChangedListener { viewModel.eciNci = it.toString() }
+        
+        binding.templatePci.setText(viewModel.pci)
+        binding.templatePci.addTextChangedListener { viewModel.pci = it.toString() }
+        
+        binding.templateTac.setText(viewModel.tac)
+        binding.templateTac.addTextChangedListener { viewModel.tac = it.toString() }
+        
+        binding.templateEarfcnNrarfcn.setText(viewModel.earfcnNrarfcn)
+        binding.templateEarfcnNrarfcn.addTextChangedListener { viewModel.earfcnNrarfcn = it.toString() }
+        
+        binding.templateBandwidth.setText(viewModel.bandwidth)
+        binding.templateBandwidth.addTextChangedListener { viewModel.bandwidth = it.toString() }
+        
         binding.appliedApps.setOnClickListener {
             setFragmentResultListener("app_select") { _, bundle ->
                 viewModel.appliedAppList.value = bundle.getStringArrayList("checked")!!
@@ -99,14 +118,6 @@ class TemplateSettingsFragment : Fragment(R.layout.fragment_template_settings) {
             navController.navigate(R.id.nav_scope, args.toBundle())
         }
 
-        lifecycleScope.launch {
-            viewModel.targetAppList.collect {
-                val fmt =
-                    if (viewModel.isWhiteList) R.string.template_apps_visible_count
-                    else R.string.template_apps_invisible_count
-                binding.targetApps.text = String.format(getString(fmt), it.size)
-            }
-        }
         lifecycleScope.launch {
             viewModel.appliedAppList.collect {
                 binding.appliedApps.text = String.format(getString(R.string.template_applied_count), it.size)
