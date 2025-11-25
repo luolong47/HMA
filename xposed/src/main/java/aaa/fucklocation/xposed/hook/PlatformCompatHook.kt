@@ -24,8 +24,8 @@ class PlatformCompatHook(private val service: HMAService) : IFrameworkHook {
 
     override fun load() {
         if (!service.config.forceMountData) return
-        logI(TAG, "Load hook")
-        logI(TAG, "App data isolation enabled: $sAppDataIsolationEnabled")
+        logI(TAG, "加载Hook")
+        logI(TAG, "应用数据隔离已启用: $sAppDataIsolationEnabled")
         hook = findMethod("com.android.server.compat.PlatformCompat") {
             name == "isChangeEnabled"
         }.hookBefore { param ->
@@ -39,12 +39,12 @@ class PlatformCompatHook(private val service: HMAService) : IFrameworkHook {
                 for (app in apps) {
                     if (service.isHookEnabled(app)) {
                         if (sAppDataIsolationEnabled) param.result = true
-                        logI(TAG, "force mount data: ${appInfo.uid} $app")
+                        logI(TAG, "强制挂载数据: ${appInfo.uid} $app")
                         return@hookBefore
                     }
                 }
             }.onFailure {
-                logE(TAG, "Fatal error occurred, disable hooks", it)
+                logE(TAG, "发生致命错误，禁用Hook", it)
                 unload()
             }
         }

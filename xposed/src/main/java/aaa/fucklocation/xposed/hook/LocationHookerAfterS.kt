@@ -77,15 +77,15 @@ class LocationHookerAfterS : IFrameworkHook {
                     try {
                         val targetParam: Any = if (it.args[0] is String) it.args[2] else it.args[1]
                         val packageName = getPackageNameFromIdentity(targetParam)
-                        logI(TAG, "in getLastLocation! Caller package name: $packageName")
+                        logI(TAG, "在getLastLocation中!调用者包名: $packageName")
 
                         if (isInWhitelist(packageName)) {
-                            logI(TAG, "in whitelist! Return custom location")
+                            logI(TAG, "在白名单中!返回自定义位置")
                             val fakeLocation = createFakeLocation(it.result as? Location, packageName)
                             it.result = fakeLocation
                         }
                     } catch (e: Exception) {
-                        logE(TAG, "Error in getLastLocation hook", e)
+                        logE(TAG, "getLastLocation Hook出错", e)
                     }
                 }
             })
@@ -98,14 +98,14 @@ class LocationHookerAfterS : IFrameworkHook {
                     try {
                         val targetParam: Any = if (param.args[0] is String) param.args[0] else param.args[1]
                         val packageName = getPackageNameFromIdentity(targetParam)
-                        logI(TAG, "in getCurrentLocation! Caller package name: $packageName")
+                        logI(TAG, "在getCurrentLocation中!调用者包名: $packageName")
 
                         if (isInWhitelist(packageName)) {
-                            logI(TAG, "in whiteList! Inject null...")
+                            logI(TAG, "在白名单中!注入null...")
                             param.result = null
                         }
                     } catch (e: Exception) {
-                        logE(TAG, "Error in getCurrentLocation hook", e)
+                        logE(TAG, "getCurrentLocation Hook出错", e)
                     }
                 }
             })
@@ -115,10 +115,10 @@ class LocationHookerAfterS : IFrameworkHook {
                 name == "registerGnssStatusCallback" && isPublic
             }.hookBefore { param ->
                 val packageName = param.args[1] as String
-                logI(TAG, "in registerGnssStatusCallback (S)! Caller package name: $packageName")
+                logI(TAG, "在registerGnssStatusCallback (S)中!调用者包名: $packageName")
 
                 if (isInWhitelist(packageName)) {
-                    logI(TAG, "in whiteList! Dropping register request...")
+                    logI(TAG, "在白名单中!丢弃注册请求...")
                     param.result = null
                     return@hookBefore
                 }
@@ -128,10 +128,10 @@ class LocationHookerAfterS : IFrameworkHook {
                 name == "registerGnssNmeaCallback" && isPublic
             }.hookBefore { param ->
                 val packageName = param.args[1] as String
-                logI(TAG, "in registerGnssNmeaCallback (S)! Caller package name: $packageName")
+                logI(TAG, "在registerGnssNmeaCallback (S)中!调用者包名: $packageName")
 
                 if (isInWhitelist(packageName)) {
-                    logI(TAG, "in whiteList! Dropping register request...")
+                    logI(TAG, "在白名单中!丢弃注册请求...")
                     param.result = null
                     return@hookBefore
                 }
@@ -141,18 +141,18 @@ class LocationHookerAfterS : IFrameworkHook {
                 name == "requestGeofence" && isPublic
             }.hookBefore { param ->
                 val packageName = param.args[2] as String
-                logI(TAG, "in requestGeofence (S)! Caller package name: $packageName")
+                logI(TAG, "在requestGeofence (S)中!调用者包名: $packageName")
 
                 if (isInWhitelist(packageName)) {
-                    logI(TAG, "in whiteList! Dropping register request...")
+                    logI(TAG, "在白名单中!丢弃注册请求...")
                     param.result = null
                     return@hookBefore
                 }
             })
 
-            logI(TAG, "LocationHookerAfterS hooks initialized")
+            logI(TAG, "LocationHookerAfterS Hook已初始化")
         } catch (e: Exception) {
-            logE(TAG, "Failed to initialize LocationHookerAfterS", e)
+            logE(TAG, "初始化LocationHookerAfterS失败", e)
         }
     }
 
@@ -165,7 +165,7 @@ class LocationHookerAfterS : IFrameworkHook {
      * @param param 方法Hook参数
      */
     private fun hookOnReportLocation(clazz: Class<*>, param: XC_MethodHook.MethodHookParam) {
-        logI(TAG, "in onReportLocation!")
+        logI(TAG, "在onReportLocation中!")
 
         try {
             val mRegistrations = findField(clazz, true) {
@@ -213,7 +213,7 @@ class LocationHookerAfterS : IFrameworkHook {
 
             mRegistrations.set(param.thisObject, newRegistrations)
         } catch (e: Exception) {
-            logE(TAG, "Error in hookOnReportLocation", e)
+            logE(TAG, "hookOnReportLocation出错", e)
         }
     }
 
@@ -239,7 +239,7 @@ class LocationHookerAfterS : IFrameworkHook {
                 else -> "unknown"
             }
         } catch (e: Exception) {
-            logE(TAG, "Failed to get package name from identity", e)
+            logE(TAG, "从身份获取包名失败", e)
             "unknown"
         }
     }
@@ -255,27 +255,27 @@ class LocationHookerAfterS : IFrameworkHook {
     private fun isInWhitelist(packageName: String): Boolean {
         // 首先检查是否是系统关键包，这些包不应该被 Hook
         if (packageName in Constants.packagesShouldNotHide) {
-            logI(TAG, "Package $packageName is in system protected list, skipping")
+            logI(TAG, "包 $packageName 在系统保护列表中，跳过")
             return false
         }
         
         // 检查是否是应用自身
         if (packageName == Constants.APP_PACKAGE_NAME) {
-            logI(TAG, "Skipping self package: $packageName")
+            logI(TAG, "跳过自身包: $packageName")
             return false
         }
         
         // 检查是否是 Google 服务相关包
         if (packageName == Constants.GMS_PACKAGE_NAME || packageName == Constants.GSF_PACKAGE_NAME) {
-            logI(TAG, "Google service package: $packageName, checking config")
+            logI(TAG, "Google服务包: $packageName，检查配置")
         }
         
         // 检查配置中是否启用了对该包的 Hook
         val isHookEnabled = HMAService.instance?.isHookEnabled(packageName) ?: false
         if (isHookEnabled) {
-            logI(TAG, "Package $packageName is enabled for location hooking")
+            logI(TAG, "包 $packageName 已启用位置Hook")
         } else {
-            logD(TAG, "Package $packageName is not in whitelist")
+            logD(TAG, "包 $packageName 不在白名单中")
         }
         
         return isHookEnabled
@@ -310,16 +310,16 @@ class LocationHookerAfterS : IFrameworkHook {
                     if (template != null) {
                         latitude = template.latitude?.toDoubleOrNull() ?: 39.9042
                         longitude = template.longitude?.toDoubleOrNull() ?: 116.4074
-                        logI(TAG, "Got location from config for $packageName: lat=$latitude, lon=$longitude")
+                        logI(TAG, "从配置获取 $packageName 的位置: 纬度=$latitude, 经度=$longitude")
                     }
                 } else {
-                    logW(TAG, "Template is empty for $packageName, using default location")
+                    logW(TAG, "$packageName 的模板为空，使用默认位置")
                 }
             } else {
-                logW(TAG, "HMAService instance is null, using default location")
+                logW(TAG, "HMAService实例为null，使用默认位置")
             }
         } catch (e: Exception) {
-            logE(TAG, "Failed to get template from config", e)
+            logE(TAG, "从配置获取模板失败", e)
         }
         
         // 设置伪造的经纬度，添加一些随机偏移
@@ -338,7 +338,7 @@ class LocationHookerAfterS : IFrameworkHook {
                 try {
                     fakeLocation.bearingAccuracyDegrees = original.bearingAccuracyDegrees
                 } catch (e: Exception) {
-                    logE(TAG, "Failed to set bearingAccuracyDegrees", e)
+                    logE(TAG, "设置bearingAccuracyDegrees失败", e)
                 }
             }
             
@@ -347,13 +347,13 @@ class LocationHookerAfterS : IFrameworkHook {
                 try {
                     fakeLocation.elapsedRealtimeUncertaintyNanos = original.elapsedRealtimeUncertaintyNanos
                 } catch (e: Exception) {
-                    logE(TAG, "Failed to set elapsedRealtimeUncertaintyNanos", e)
+                    logE(TAG, "设置elapsedRealtimeUncertaintyNanos失败", e)
                 }
                 
                 try {
                     fakeLocation.verticalAccuracyMeters = original.verticalAccuracyMeters
                 } catch (e: Exception) {
-                    logE(TAG, "Failed to set verticalAccuracyMeters", e)
+                    logE(TAG, "设置verticalAccuracyMeters失败", e)
                 }
             }
         } ?: run {
@@ -367,7 +367,7 @@ class LocationHookerAfterS : IFrameworkHook {
             try {
                 fakeLocation.isMock = false
             } catch (e: Exception) {
-                logE(TAG, "Failed to set isMock", e)
+                logE(TAG, "设置isMock失败", e)
             }
         }
         
@@ -378,7 +378,7 @@ class LocationHookerAfterS : IFrameworkHook {
             try {
                 fakeLocation.speedAccuracyMetersPerSecond = 0F
             } catch (e: Exception) {
-                logE(TAG, "Failed to set speedAccuracyMetersPerSecond", e)
+                logE(TAG, "设置speedAccuracyMetersPerSecond失败", e)
             }
         }
         
@@ -389,7 +389,7 @@ class LocationHookerAfterS : IFrameworkHook {
                 setIsFromMockProviderMethod.isAccessible = true
                 setIsFromMockProviderMethod.invoke(fakeLocation, false)
             } catch (e: Exception) {
-                logE(TAG, "Not possible to set mock flag", e)
+                logE(TAG, "无法设置模拟标志", e)
             }
         }
         

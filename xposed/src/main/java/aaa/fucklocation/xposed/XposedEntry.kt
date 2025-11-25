@@ -57,7 +57,7 @@ class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
             }
         } else if (lpparam.packageName == "android") {
             EzXHelperInit.initHandleLoadPackage(lpparam)
-            logI(TAG, "Hook entry")
+            logI(TAG, "Hook入口")
 
             var serviceManagerHook: XC_MethodHook.Unhook? = null
             serviceManagerHook = findMethod("android.os.ServiceManager") {
@@ -66,13 +66,13 @@ class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
                 if (param.args[0] == "package") {
                     serviceManagerHook?.unhook()
                     val pms = param.args[1] as IPackageManager
-                    logD(TAG, "Got pms: $pms")
+                    logD(TAG, "获取到包管理服务: $pms")
                     thread {
                         runCatching {
                             UserService.register(pms)
-                            logI(TAG, "User service started")
+                            logI(TAG, "用户服务已启动")
                         }.onFailure {
-                            logE(TAG, "System service crashed", it)
+                            logE(TAG, "系统服务崩溃", it)
                         }
                     }
                 }
@@ -82,10 +82,10 @@ class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
             initLocationHooks(lpparam)
         } else if (lpparam.packageName == "com.android.phone") {
             EzXHelperInit.initHandleLoadPackage(lpparam)
-            logI(TAG, "Hook entry for phone")
+            logI(TAG, "电话包Hook入口")
             
             // 初始化基站定位Hook
-            logI(TAG, "Initializing Cell Location Hooks for phone package")
+            logI(TAG, "为电话包初始化基站定位Hook")
             CellLocationHookerS().initHooks(lpparam)
         }
     }
@@ -100,10 +100,10 @@ class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
      * @param lpparam 加载包参数
      */
     private fun initLocationHooks(lpparam: XC_LoadPackage.LoadPackageParam) {
-        logI(TAG, "Initializing Location Hooks for Android ${Build.VERSION.SDK_INT}")
+        logI(TAG, "为Android ${Build.VERSION.SDK_INT}初始化位置Hook")
 
         // 由于最低API为31，只支持Android 12+
-        logI(TAG, "Android 12+ detected, applying LocationHookerAfterS")
+        logI(TAG, "检测到Android 12+，应用LocationHookerAfterS")
         LocationHookerAfterS().initHooks(lpparam)
         GnssManagerServiceHookerS().initHooks(lpparam)
     }

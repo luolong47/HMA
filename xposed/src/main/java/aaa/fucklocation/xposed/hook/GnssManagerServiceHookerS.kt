@@ -12,6 +12,10 @@ import aaa.fucklocation.common.Constants
 /** 日志标签 */
 private const val TAG = "GnssManagerServiceHookerS"
 
+/** 日志消息常量 */
+private const val MSG_IN_METHOD = "在%s中!调用者包名: %s"
+private const val MSG_IN_WHITELIST = "在白名单中!丢弃注册请求..."
+
 /**
  * GNSS管理服务Hook类
  * 
@@ -69,49 +73,49 @@ class GnssManagerServiceHookerS : IFrameworkHook {
                             "addGnssMeasurementsListener" -> param.args[2] as String
                             else -> param.args[1] as String
                         }
-                        logI(TAG, "in $methodName! Caller package name: $packageName")
+                        logI(TAG, String.format(MSG_IN_METHOD, methodName, packageName))
 
                         if (isInWhitelist(packageName)) {
-                            logI(TAG, "in whiteList! Dropping register request...")
+                            logI(TAG, MSG_IN_WHITELIST)
                             param.result = null
                             return@hookBefore
                         }
                     } catch (e: Exception) {
-                        logE(TAG, "Error in $methodName hook", e)
+                        logE(TAG, "$methodName Hook出错", e)
                     }
                 })
             }
 
-            logI(TAG, "GnssManagerServiceHookerS hooks initialized")
+            logI(TAG, "GnssManagerServiceHookerS Hook已初始化")
         } catch (e: Exception) {
-            logE(TAG, "Failed to initialize GnssManagerServiceHookerS", e)
+            logE(TAG, "初始化GnssManagerServiceHookerS失败", e)
         }
     }
 
     private fun isInWhitelist(packageName: String): Boolean {
         // 首先检查是否是系统关键包，这些包不应该被 Hook
         if (packageName in Constants.packagesShouldNotHide) {
-            logI(TAG, "Package $packageName is in system protected list, skipping")
+            logI(TAG, "包 $packageName 在系统保护列表中，跳过")
             return false
         }
         
         // 检查是否是应用自身
         if (packageName == Constants.APP_PACKAGE_NAME) {
-            logI(TAG, "Skipping self package: $packageName")
+            logI(TAG, "跳过自身包: $packageName")
             return false
         }
         
         // 检查是否是 Google 服务相关包
         if (packageName == Constants.GMS_PACKAGE_NAME || packageName == Constants.GSF_PACKAGE_NAME) {
-            logI(TAG, "Google service package: $packageName, checking config")
+            logI(TAG, "Google服务包: $packageName，检查配置")
         }
         
         // 检查配置中是否启用了对该包的 Hook
         val isHookEnabled = HMAService.instance?.isHookEnabled(packageName) ?: false
         if (isHookEnabled) {
-            logI(TAG, "Package $packageName is enabled for location hooking")
+            logI(TAG, "包 $packageName 已启用位置Hook")
         } else {
-            logI(TAG, "Package $packageName is not in whitelist")
+            logI(TAG, "包 $packageName 不在白名单中")
         }
         
         return isHookEnabled

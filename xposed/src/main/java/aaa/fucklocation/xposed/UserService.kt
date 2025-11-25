@@ -23,7 +23,7 @@ object UserService {
             try {
                 val provider = ActivityManagerApis.getContentProviderExternal(Constants.PROVIDER_AUTHORITY, 0, null, null)
                 if (provider == null) {
-                    logE(TAG, "Failed to get provider")
+                    logE(TAG, "获取提供者失败")
                     return
                 }
                 val extras = Bundle()
@@ -39,27 +39,27 @@ object UserService {
                     provider.call("android", "", null, extras)
                 }
                 if (reply == null) {
-                    logE(TAG, "Failed to send binder to app")
+                    logE(TAG, "发送绑定器到应用失败")
                     return
                 }
-                logI(TAG, "Send binder to app")
+                logI(TAG, "已发送绑定器到应用")
             } catch (e: Throwable) {
-                logE(TAG, "onUidActive", e)
+                logE(TAG, "UID激活时出错", e)
             }
         }
     }
 
     fun register(pms: IPackageManager) {
-        logI(TAG, "Initialize HMAService - Version ${BuildConfig.SERVICE_VERSION}")
+        logI(TAG, "初始化HMA服务 - 版本 ${BuildConfig.SERVICE_VERSION}")
         val service = HMAService(pms)
         appUid = Utils.getPackageUidCompat(service.pms, Constants.APP_PACKAGE_NAME, 0, 0)
         val appPackage = Utils.getPackageInfoCompat(service.pms, Constants.APP_PACKAGE_NAME, 0, 0)
         if (!Utils.verifyAppSignature(appPackage.applicationInfo?.sourceDir.toString())) {
-            logE(TAG, "Fatal: App signature mismatch")
+            logE(TAG, "致命错误：应用签名不匹配")
             return
         }
-        logD(TAG, "Client uid: $appUid")
-        logI(TAG, "Register observer")
+        logD(TAG, "客户端UID: $appUid")
+        logI(TAG, "注册观察者")
 
         waitSystemService("activity")
         ActivityManagerApis.registerUidObserver(

@@ -72,7 +72,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         instance = this
         loadConfig()
         installHooks()
-        logI(TAG, "HMA service initialized")
+        logI(TAG, "HMA服务已初始化")
     }
 
     /**
@@ -114,7 +114,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         logFile.createNewFile()
 
         logcatAvailable = true
-        logI(TAG, "Data dir: $dataDir")
+        logI(TAG, "数据目录: $dataDir")
     }
 
     /**
@@ -128,27 +128,27 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             runCatching {
                 if (it.exists()) filterCount = it.readText().toInt()
             }.onFailure { e ->
-                logW(TAG, "Failed to load filter count, set to 0", e)
+                logW(TAG, "加载过滤计数失败，设置为0", e)
                 it.writeText("0")
             }
         }
         if (!configFile.exists()) {
-            logI(TAG, "Config file not found")
+            logI(TAG, "未找到配置文件")
             return
         }
         val loading = runCatching {
             val json = configFile.readText()
             JsonConfig.parse(json)
         }.getOrElse {
-            logE(TAG, "Failed to parse config.json", it)
+            logE(TAG, "解析config.json失败", it)
             return
         }
         if (loading.configVersion != BuildConfig.CONFIG_VERSION) {
-            logW(TAG, "Config version mismatch, need to reload")
+            logW(TAG, "配置版本不匹配，需要重新加载")
             return
         }
         config = loading
-        logI(TAG, "Config loaded")
+        logI(TAG, "配置已加载")
     }
 
     /**
@@ -179,7 +179,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         }
 
         frameworkHooks.forEach(IFrameworkHook::load)
-        logI(TAG, "Hooks installed")
+        logI(TAG, "Hook已安装")
     }
 
     /**
@@ -217,7 +217,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
      * @param cleanEnv 是否清理运行环境，如果为true将删除所有数据
      */
     override fun stopService(cleanEnv: Boolean) {
-        logI(TAG, "Stop service")
+        logI(TAG, "停止服务")
         synchronized(loggerLock) {
             logcatAvailable = false
         }
@@ -225,7 +225,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             frameworkHooks.forEach(IFrameworkHook::unload)
             frameworkHooks.clear()
             if (cleanEnv) {
-                logI(TAG, "Clean runtime environment")
+                logI(TAG, "清理运行环境")
                 File(dataDir).deleteRecursively()
                 return
             }
@@ -260,13 +260,13 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             configFile.writeText(json)
             val newConfig = JsonConfig.parse(json)
             if (newConfig.configVersion != BuildConfig.CONFIG_VERSION) {
-                logW(TAG, "Sync config: version mismatch, need reboot")
+                logW(TAG, "同步配置：版本不匹配，需要重启")
                 return
             }
             config = newConfig
             frameworkHooks.forEach(IFrameworkHook::onConfigChanged)
         }
-        logD(TAG, "Config synced")
+        logD(TAG, "配置已同步")
     }
 
     /**

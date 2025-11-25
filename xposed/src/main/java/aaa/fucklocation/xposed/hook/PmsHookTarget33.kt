@@ -27,7 +27,7 @@ class PmsHookTarget33(private val service: HMAService) : IFrameworkHook {
 
     @Suppress("UNCHECKED_CAST")
     override fun load() {
-        logI(TAG, "Load hook")
+        logI(TAG, "加载Hook")
         hook = findMethod("com.android.server.pm.AppsFilterImpl", findSuper = true) {
             name == "shouldFilterApplication"
         }.hookBefore { param ->
@@ -44,13 +44,13 @@ class PmsHookTarget33(private val service: HMAService) : IFrameworkHook {
                         param.result = true
                         service.filterCount++
                         val last = lastFilteredApp.getAndSet(caller)
-                        if (last != caller) logI(TAG, "@shouldFilterApplication: query from $caller")
-                        logD(TAG, "@shouldFilterApplication caller: $callingUid $caller, target: $targetApp")
+                        if (last != caller) logI(TAG, "@shouldFilterApplication: 查询来自 $caller")
+                        logD(TAG, "@shouldFilterApplication 调用者: $callingUid $caller, 目标: $targetApp")
                         return@hookBefore
                     }
                 }
             }.onFailure {
-                logE(TAG, "Fatal error occurred, disable hooks", it)
+                logE(TAG, "发生致命错误，禁用Hook", it)
                 unload()
             }
         }

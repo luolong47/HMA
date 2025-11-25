@@ -58,10 +58,10 @@ class CellLocationHookerS : IFrameworkHook {
                         try {
                             // 获取调用者包名
                             val packageName = getPackageNameFromBinder()
-                            logI(TAG, "in getCellLocation! Caller package name: $packageName")
+                            logI(TAG, "在getCellLocation中!调用者包名: $packageName")
 
                             if (isInWhitelist(packageName)) {
-                                logI(TAG, "in whiteList! Return custom cell data information")
+                                logI(TAG, "在白名单中!返回自定义基站数据信息")
                                 
                                 // 获取模板配置
                                 val hmaService = HMAService.instance
@@ -76,15 +76,15 @@ class CellLocationHookerS : IFrameworkHook {
                                                 val className = result.javaClass.simpleName
                                                 when {
                                                     className.contains("Lte") -> {
-                                                        logI(TAG, "Using LTE Network...")
+                                                        logI(TAG, "使用LTE网络...")
                                                         param.result = createFakeLteCellIdentity(result, template)
                                                     }
                                                     className.contains("Nr") -> {
-                                                        logI(TAG, "Using NR Network...")
+                                                        logI(TAG, "使用NR网络...")
                                                         param.result = createFakeNrCellIdentity(result, template)
                                                     }
                                                     else -> {
-                                                        logI(TAG, "Unsupported network type: $className")
+                                                        logI(TAG, "不支持的网络类型: $className")
                                                     }
                                                 }
                                             }
@@ -93,7 +93,7 @@ class CellLocationHookerS : IFrameworkHook {
                                 }
                             }
                         } catch (e: Exception) {
-                            logE(TAG, "Error in getCellLocation hook", e)
+                            logE(TAG, "getCellLocation Hook出错", e)
                         }
                     }
                 })
@@ -105,14 +105,14 @@ class CellLocationHookerS : IFrameworkHook {
                 try {
                     // 获取调用者包名
                     val packageName = getPackageNameFromBinder()
-                    logI(TAG, "in getAllCellInfo! Caller package name: $packageName")
+                    logI(TAG, "在getAllCellInfo中!调用者包名: $packageName")
 
                     if (isInWhitelist(packageName)) {
-                        logI(TAG, "in whiteList! Return empty cell info list")
+                        logI(TAG, "在白名单中!返回空基站信息列表")
                         param.result = emptyList<Any>()
                     }
                 } catch (e: Exception) {
-                    logE(TAG, "Error in getAllCellInfo hook", e)
+                    logE(TAG, "getAllCellInfo Hook出错", e)
                 }
             })
 
@@ -123,15 +123,15 @@ class CellLocationHookerS : IFrameworkHook {
                 try {
                     // 获取调用者包名
                     val packageName = getPackageNameFromBinder()
-                    logI(TAG, "in requestCellInfoUpdate! Caller package name: $packageName")
+                    logI(TAG, "在requestCellInfoUpdate中!调用者包名: $packageName")
 
                     if (isInWhitelist(packageName)) {
-                        logI(TAG, "in whiteList! Dropping cell info update request")
+                        logI(TAG, "在白名单中!丢弃基站信息更新请求")
                         param.result = null
                         return@hookBefore
                     }
                 } catch (e: Exception) {
-                    logE(TAG, "Error in requestCellInfoUpdate hook", e)
+                    logE(TAG, "requestCellInfoUpdate Hook出错", e)
                 }
             })
 
@@ -143,21 +143,21 @@ class CellLocationHookerS : IFrameworkHook {
                     try {
                         // 获取调用者包名
                         val packageName = getPackageNameFromBinder()
-                        logI(TAG, "in getNeighboringCellInfo! Caller package name: $packageName")
+                        logI(TAG, "在getNeighboringCellInfo中!调用者包名: $packageName")
 
                         if (isInWhitelist(packageName)) {
-                            logI(TAG, "in whiteList! Return empty neighboring cell info list")
+                            logI(TAG, "在白名单中!返回空邻近基站信息列表")
                             param.result = emptyList<Any>()
                         }
                     } catch (e: Exception) {
-                        logE(TAG, "Error in getNeighboringCellInfo hook", e)
+                        logE(TAG, "getNeighboringCellInfo Hook出错", e)
                     }
                 })
             }
 
-            logI(TAG, "CellLocationHookerS hooks initialized")
+            logI(TAG, "CellLocationHookerS Hook已初始化")
         } catch (e: Exception) {
-            logE(TAG, "Failed to initialize CellLocationHookerS", e)
+            logE(TAG, "初始化CellLocationHookerS失败", e)
         }
     }
 
@@ -173,7 +173,7 @@ class CellLocationHookerS : IFrameworkHook {
             
             packagesForUid?.firstOrNull() ?: "unknown"
         } catch (e: Exception) {
-            logE(TAG, "Failed to get package name from binder", e)
+            logE(TAG, "从Binder获取包名失败", e)
             "unknown"
         }
     }
@@ -181,27 +181,27 @@ class CellLocationHookerS : IFrameworkHook {
     private fun isInWhitelist(packageName: String): Boolean {
         // 首先检查是否是系统关键包，这些包不应该被 Hook
         if (packageName in Constants.packagesShouldNotHide) {
-            logI(TAG, "Package $packageName is in system protected list, skipping")
+            logI(TAG, "包 $packageName 在系统保护列表中，跳过")
             return false
         }
         
         // 检查是否是应用自身
         if (packageName == Constants.APP_PACKAGE_NAME) {
-            logI(TAG, "Skipping self package: $packageName")
+            logI(TAG, "跳过自身包: $packageName")
             return false
         }
         
         // 检查是否是 Google 服务相关包
         if (packageName == Constants.GMS_PACKAGE_NAME || packageName == Constants.GSF_PACKAGE_NAME) {
-            logI(TAG, "Google service package: $packageName, checking config")
+            logI(TAG, "Google服务包: $packageName，检查配置")
         }
         
         // 检查配置中是否启用了对该包的 Hook
         val isHookEnabled = HMAService.instance?.isHookEnabled(packageName) ?: false
         if (isHookEnabled) {
-            logI(TAG, "Package $packageName is enabled for cell location hooking")
+            logI(TAG, "包 $packageName 已启用基站位置Hook")
         } else {
-            logI(TAG, "Package $packageName is not in whitelist")
+            logI(TAG, "包 $packageName 不在白名单中")
         }
         
         return isHookEnabled
@@ -289,7 +289,7 @@ class CellLocationHookerS : IFrameworkHook {
                 )
             }
         } catch (e: Exception) {
-            logE(TAG, "Failed to create fake LTE cell identity", e)
+            logE(TAG, "创建虚假LTE基站标识失败", e)
             return originalCell
         }
     }
@@ -371,7 +371,7 @@ class CellLocationHookerS : IFrameworkHook {
                 )
             }
         } catch (e: Exception) {
-            logE(TAG, "Failed to create fake NR cell identity", e)
+            logE(TAG, "创建虚假NR基站标识失败", e)
             return originalCell
         }
     }

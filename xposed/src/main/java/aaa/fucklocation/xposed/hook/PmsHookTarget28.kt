@@ -20,7 +20,7 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
 
     @Suppress("UNCHECKED_CAST")
     override fun load() {
-        logI(TAG, "Load hook")
+        logI(TAG, "加载Hook")
         hooks += findMethod(service.pms::class.java, findSuper = true) {
             name == "filterAppAccessLPr" && parameterCount == 5
         }.hookBefore { param ->
@@ -37,13 +37,13 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
                         param.result = true
                         service.filterCount++
                         val last = lastFilteredApp.getAndSet(caller)
-                        if (last != caller) logI(TAG, "@filterAppAccessLPr query from $caller")
-                        logD(TAG, "@filterAppAccessLPr caller: $callingUid $caller, target: $targetApp")
+                        if (last != caller) logI(TAG, "@filterAppAccessLPr 查询来自 $caller")
+                        logD(TAG, "@filterAppAccessLPr 调用者: $callingUid $caller, 目标: $targetApp")
                         return@hookBefore
                     }
                 }
             }.onFailure {
-                logE(TAG, "Fatal error occurred, disable hooks", it)
+                logE(TAG, "发生致命错误，禁用Hook", it)
                 unload()
             }
         }
@@ -65,8 +65,8 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
                     for (caller in callingApps) {
                         if (service.shouldHide(caller, targetApp)) {
                             val last = lastFilteredApp.getAndSet(caller)
-                            if (last != caller) logI(TAG, "@applyPostResolutionFilter query from $caller")
-                            logD(TAG, "@applyPostResolutionFilter caller: $callingUid $caller, target: $targetApp")
+                            if (last != caller) logI(TAG, "@applyPostResolutionFilter 查询来自 $caller")
+                            logD(TAG, "@applyPostResolutionFilter 调用者: $callingUid $caller, 目标: $targetApp")
                             listToRemove.add(resolveInfo)
                             break
                         }
@@ -74,7 +74,7 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
                 }
                 list.removeAll(listToRemove)
             }.onFailure {
-                logE(TAG, "Fatal error occurred, disable hooks", it)
+                logE(TAG, "发生致命错误，禁用Hook", it)
                 unload()
             }
         }
