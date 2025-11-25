@@ -1,12 +1,12 @@
-package icu.nullptr.hidemyapplist.xposed.hook
+package aaa.fucklocation.xposed.hook
 
 import android.content.pm.ResolveInfo
 import com.github.kyuubiran.ezxhelper.utils.findMethod
 import com.github.kyuubiran.ezxhelper.utils.hookAfter
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
 import de.robv.android.xposed.XC_MethodHook
-import icu.nullptr.hidemyapplist.common.Constants
-import icu.nullptr.hidemyapplist.xposed.*
+import aaa.fucklocation.common.Constants
+import aaa.fucklocation.xposed.*
 import java.util.concurrent.atomic.AtomicReference
 
 class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {

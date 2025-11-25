@@ -1,10 +1,10 @@
-package icu.nullptr.hidemyapplist.service
+package aaa.fucklocation.service
 
 import android.content.ComponentName
 import android.content.Context.MODE_PRIVATE
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatDelegate
-import icu.nullptr.hidemyapplist.hmaApp
+import aaa.fucklocation.hmaApp
 
 object PrefManager {
 
@@ -61,7 +61,7 @@ object PrefManager {
         get() = pref.getBoolean(PREF_HIDE_ICON, false)
         set(value) {
             pref.edit().putBoolean(PREF_HIDE_ICON, value).apply()
-            val component = ComponentName(hmaApp, "com.tsng.hidemyapplist.MainActivityLauncher")
+            val component = ComponentName(hmaApp, "apk.fucklocation.MainActivityLauncher")
             val status =
                 if (value) PackageManager.COMPONENT_ENABLED_STATE_DISABLED
                 else PackageManager.COMPONENT_ENABLED_STATE_ENABLED

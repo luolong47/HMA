@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.xposed.hook
+package aaa.fucklocation.xposed.hook
 
 import android.content.pm.ApplicationInfo
 import android.os.Build
@@ -6,11 +6,11 @@ import androidx.annotation.RequiresApi
 import com.github.kyuubiran.ezxhelper.utils.findMethod
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
 import de.robv.android.xposed.XC_MethodHook
-import icu.nullptr.hidemyapplist.common.CommonUtils
-import icu.nullptr.hidemyapplist.xposed.HMAService
-import icu.nullptr.hidemyapplist.xposed.Utils
-import icu.nullptr.hidemyapplist.xposed.logE
-import icu.nullptr.hidemyapplist.xposed.logI
+import aaa.fucklocation.common.CommonUtils
+import aaa.fucklocation.xposed.HMAService
+import aaa.fucklocation.xposed.Utils
+import aaa.fucklocation.xposed.logE
+import aaa.fucklocation.xposed.logI
 
 @RequiresApi(Build.VERSION_CODES.R)
 class PlatformCompatHook(private val service: HMAService) : IFrameworkHook {

@@ -1,12 +1,12 @@
-package icu.nullptr.hidemyapplist.service
+package aaa.fucklocation.service
 
 import android.os.Build
 import android.util.Log
-import com.tsng.hidemyapplist.R
-import icu.nullptr.hidemyapplist.common.BuildConfig
-import icu.nullptr.hidemyapplist.common.JsonConfig
-import icu.nullptr.hidemyapplist.hmaApp
-import icu.nullptr.hidemyapplist.ui.util.makeToast
+import apk.fucklocation.R
+import aaa.fucklocation.common.BuildConfig
+import aaa.fucklocation.common.JsonConfig
+import aaa.fucklocation.hmaApp
+import aaa.fucklocation.ui.util.makeToast
 import java.io.File
 
 object ConfigManager {

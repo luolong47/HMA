@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.util
+package aaa.fucklocation.util
 
 import com.topjohnwu.superuser.Shell
 

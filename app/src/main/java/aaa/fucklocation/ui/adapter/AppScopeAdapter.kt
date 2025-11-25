@@ -1,7 +1,7 @@
-package icu.nullptr.hidemyapplist.ui.adapter
+package aaa.fucklocation.ui.adapter
 
 import android.view.ViewGroup
-import icu.nullptr.hidemyapplist.ui.view.AppItemView
+import aaa.fucklocation.ui.view.AppItemView
 
 class AppScopeAdapter(
     private val checked: MutableSet<String>,

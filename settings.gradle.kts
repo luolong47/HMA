@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HideMyApplist"
+rootProject.name = "FuckLocation"
 
 include(
     ":app",

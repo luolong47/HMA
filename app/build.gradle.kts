@@ -19,7 +19,7 @@ if (officialBuild) {
 }
 
 android {
-    namespace = "com.tsng.hidemyapplist"
+    namespace = "apk.fucklocation"
 
     buildFeatures {
         buildConfig = true
@@ -46,7 +46,7 @@ kotlin {
 autoResConfig {
     generateClass.set(true)
     generateRes.set(false)
-    generatedClassFullName.set("icu.nullptr.hidemyapplist.util.LangList")
+    generatedClassFullName.set("aaa.fucklocation.util.LangList")
     generatedArrayFirstItem.set("SYSTEM")
 }
 

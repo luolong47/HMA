@@ -1,5 +1,5 @@
 # Xposed
--keepclassmembers class icu.nullptr.hidemyapplist.MyApp {
+-keepclassmembers class aaa.fucklocation.MyApp {
     boolean isHooked;
 }
 
@@ -9,10 +9,10 @@
     public static ** valueOf(java.lang.String);
 }
 
--keep class icu.nullptr.hidemyapplist.data.UpdateData { *; }
--keep class icu.nullptr.hidemyapplist.data.UpdateData$* { *; }
+-keep class aaa.fucklocation.data.UpdateData { *; }
+-keep class aaa.fucklocation.data.UpdateData$* { *; }
 
 -keep,allowoptimization class * extends androidx.preference.PreferenceFragmentCompat
--keepclassmembers class com.tsng.hidemyapplist.databinding.**  {
+-keepclassmembers class apk.fucklocation.databinding.**  {
     public <methods>;
 }

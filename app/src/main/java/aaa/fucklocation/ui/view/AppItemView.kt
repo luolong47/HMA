@@ -1,12 +1,12 @@
-package icu.nullptr.hidemyapplist.ui.view
+package aaa.fucklocation.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.tsng.hidemyapplist.databinding.AppItemViewBinding
-import icu.nullptr.hidemyapplist.util.PackageHelper
+import apk.fucklocation.databinding.AppItemViewBinding
+import aaa.fucklocation.util.PackageHelper
 
 class AppItemView @JvmOverloads constructor(
     context: Context,

@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.ui.util
+package aaa.fucklocation.ui.util
 
 import android.content.Context
 import android.graphics.Color
@@ -8,8 +8,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
 import com.google.android.material.color.DynamicColors
-import com.tsng.hidemyapplist.R
-import icu.nullptr.hidemyapplist.service.PrefManager
+import apk.fucklocation.R
+import aaa.fucklocation.service.PrefManager
 import rikka.core.util.ResourceUtils
 
 object ThemeUtils {

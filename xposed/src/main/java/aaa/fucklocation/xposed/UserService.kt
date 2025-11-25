@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.xposed
+package aaa.fucklocation.xposed
 
 import android.app.ActivityManagerHidden
 import android.content.AttributionSource
@@ -6,8 +6,8 @@ import android.content.pm.IPackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.ServiceManager
-import icu.nullptr.hidemyapplist.common.BuildConfig
-import icu.nullptr.hidemyapplist.common.Constants
+import aaa.fucklocation.common.BuildConfig
+import aaa.fucklocation.common.Constants
 import rikka.hidden.compat.ActivityManagerApis
 import rikka.hidden.compat.adapter.UidObserverAdapter
 

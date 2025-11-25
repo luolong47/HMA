@@ -1,11 +1,11 @@
-package icu.nullptr.hidemyapplist.ui.fragment
+package aaa.fucklocation.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
-import icu.nullptr.hidemyapplist.service.ConfigManager
-import icu.nullptr.hidemyapplist.ui.adapter.AppScopeAdapter
-import icu.nullptr.hidemyapplist.ui.util.navController
+import aaa.fucklocation.service.ConfigManager
+import aaa.fucklocation.ui.adapter.AppScopeAdapter
+import aaa.fucklocation.ui.util.navController
 
 class ScopeFragment : AppSelectFragment() {
 

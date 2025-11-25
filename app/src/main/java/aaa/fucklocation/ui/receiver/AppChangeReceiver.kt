@@ -1,11 +1,11 @@
-package icu.nullptr.hidemyapplist.ui.receiver
+package aaa.fucklocation.ui.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
-import icu.nullptr.hidemyapplist.util.PackageHelper
+import aaa.fucklocation.util.PackageHelper
 
 class AppChangeReceiver : BroadcastReceiver() {
 

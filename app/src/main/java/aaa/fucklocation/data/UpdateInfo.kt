@@ -1,7 +1,7 @@
-package icu.nullptr.hidemyapplist.data
+package aaa.fucklocation.data
 
-import icu.nullptr.hidemyapplist.common.Constants
-import icu.nullptr.hidemyapplist.service.PrefManager
+import aaa.fucklocation.common.Constants
+import aaa.fucklocation.service.PrefManager
 import kotlinx.serialization.Serializable
 import rxhttp.*
 import rxhttp.wrapper.param.RxHttp

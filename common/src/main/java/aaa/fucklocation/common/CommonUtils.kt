@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.common
+package aaa.fucklocation.common
 
 import android.os.SystemProperties
 

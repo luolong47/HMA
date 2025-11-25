@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.xposed.hook
+package aaa.fucklocation.xposed.hook
 
 interface IFrameworkHook {
 

@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.ui.view
+package aaa.fucklocation.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,8 +6,8 @@ import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.tsng.hidemyapplist.R
-import com.tsng.hidemyapplist.databinding.ListItemViewBinding
+import apk.fucklocation.R
+import apk.fucklocation.databinding.ListItemViewBinding
 
 class ListItemView @JvmOverloads constructor(
     context: Context,

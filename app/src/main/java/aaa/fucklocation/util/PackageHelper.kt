@@ -1,13 +1,13 @@
-package icu.nullptr.hidemyapplist.util
+package aaa.fucklocation.util
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.IPackageManager
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import icu.nullptr.hidemyapplist.common.Constants
-import icu.nullptr.hidemyapplist.hmaApp
-import icu.nullptr.hidemyapplist.service.PrefManager
+import aaa.fucklocation.common.Constants
+import aaa.fucklocation.hmaApp
+import aaa.fucklocation.service.PrefManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

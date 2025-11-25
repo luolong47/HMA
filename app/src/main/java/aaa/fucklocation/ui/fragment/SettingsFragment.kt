@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.ui.fragment
+package aaa.fucklocation.ui.fragment
 
 import android.content.Intent
 import android.os.Build
@@ -15,18 +15,18 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.tsng.hidemyapplist.R
-import com.tsng.hidemyapplist.databinding.FragmentSettingsBinding
-import icu.nullptr.hidemyapplist.common.CommonUtils
-import icu.nullptr.hidemyapplist.common.Constants
-import icu.nullptr.hidemyapplist.hmaApp
-import icu.nullptr.hidemyapplist.service.ConfigManager
-import icu.nullptr.hidemyapplist.service.PrefManager
-import icu.nullptr.hidemyapplist.service.ServiceClient
-import icu.nullptr.hidemyapplist.ui.util.makeToast
-import icu.nullptr.hidemyapplist.ui.util.setupToolbar
-import icu.nullptr.hidemyapplist.util.LangList
-import icu.nullptr.hidemyapplist.util.SuUtils
+import apk.fucklocation.R
+import apk.fucklocation.databinding.FragmentSettingsBinding
+import aaa.fucklocation.common.CommonUtils
+import aaa.fucklocation.common.Constants
+import aaa.fucklocation.hmaApp
+import aaa.fucklocation.service.ConfigManager
+import aaa.fucklocation.service.PrefManager
+import aaa.fucklocation.service.ServiceClient
+import aaa.fucklocation.ui.util.makeToast
+import aaa.fucklocation.ui.util.setupToolbar
+import aaa.fucklocation.util.LangList
+import aaa.fucklocation.util.SuUtils
 import rikka.material.app.LocaleDelegate
 import rikka.preference.SimpleMenuPreference
 import java.util.*

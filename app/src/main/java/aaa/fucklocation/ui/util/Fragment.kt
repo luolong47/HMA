@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.ui.util
+package aaa.fucklocation.ui.util
 
 import android.os.Build
 import android.view.Menu

@@ -1,10 +1,10 @@
-package icu.nullptr.hidemyapplist.ui.adapter
+package aaa.fucklocation.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tsng.hidemyapplist.R
-import icu.nullptr.hidemyapplist.service.ConfigManager
-import icu.nullptr.hidemyapplist.ui.view.ListItemView
+import apk.fucklocation.R
+import aaa.fucklocation.service.ConfigManager
+import aaa.fucklocation.ui.view.ListItemView
 import java.text.Collator
 import java.util.*
 

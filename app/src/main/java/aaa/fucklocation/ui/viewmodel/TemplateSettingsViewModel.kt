@@ -1,9 +1,9 @@
-package icu.nullptr.hidemyapplist.ui.viewmodel
+package aaa.fucklocation.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import icu.nullptr.hidemyapplist.service.ConfigManager
-import icu.nullptr.hidemyapplist.ui.fragment.TemplateSettingsFragmentArgs
+import aaa.fucklocation.service.ConfigManager
+import aaa.fucklocation.ui.fragment.TemplateSettingsFragmentArgs
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class TemplateSettingsViewModel(

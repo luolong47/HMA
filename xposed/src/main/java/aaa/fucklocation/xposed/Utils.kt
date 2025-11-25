@@ -1,4 +1,4 @@
-package icu.nullptr.hidemyapplist.xposed
+package aaa.fucklocation.xposed
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.IPackageManager
@@ -7,7 +7,7 @@ import android.os.Binder
 import android.os.Build
 import com.android.apksig.ApkVerifier
 import com.github.kyuubiran.ezxhelper.utils.findField
-import icu.nullptr.hidemyapplist.Magic
+import aaa.fucklocation.Magic
 import java.io.File
 import java.util.*
 

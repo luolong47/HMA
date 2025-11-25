@@ -1,8 +1,8 @@
-package icu.nullptr.hidemyapplist.ui.viewmodel
+package aaa.fucklocation.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import icu.nullptr.hidemyapplist.common.JsonConfig
+import aaa.fucklocation.common.JsonConfig
 
 class AppSettingsViewModel(val pack: Pack) : ViewModel() {
 

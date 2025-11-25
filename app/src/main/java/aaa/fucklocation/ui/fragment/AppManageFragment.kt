@@ -1,11 +1,11 @@
-package icu.nullptr.hidemyapplist.ui.fragment
+package aaa.fucklocation.ui.fragment
 
 import android.os.Bundle
 import com.google.android.material.transition.MaterialSharedAxis
-import com.tsng.hidemyapplist.R
-import icu.nullptr.hidemyapplist.service.ConfigManager
-import icu.nullptr.hidemyapplist.ui.adapter.AppManageAdapter
-import icu.nullptr.hidemyapplist.ui.util.navController
+import apk.fucklocation.R
+import aaa.fucklocation.service.ConfigManager
+import aaa.fucklocation.ui.adapter.AppManageAdapter
+import aaa.fucklocation.ui.util.navController
 
 class AppManageFragment : AppSelectFragment() {
 

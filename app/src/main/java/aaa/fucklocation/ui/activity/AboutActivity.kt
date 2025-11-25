@@ -1,11 +1,11 @@
-package icu.nullptr.hidemyapplist.ui.activity
+package aaa.fucklocation.ui.activity
 
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import com.drakeet.about.*
-import com.tsng.hidemyapplist.BuildConfig
-import com.tsng.hidemyapplist.R
+import apk.fucklocation.BuildConfig
+import apk.fucklocation.R
 
 class AboutActivity : AbsAboutActivity() {
 
@@ -37,11 +37,11 @@ class AboutActivity : AbsAboutActivity() {
         items.add(Contributor(R.drawable.cont_cpp_master, "LoveSy", "Idea provider", "https://github.com/yujincheng08"))
 
         items.add(Category(getString(R.string.about_support)))
-        items.add(Card("Github\nhttps://github.com/Dr-TSNG/Hide-My-Applist"))
+        items.add(Card("Github\nhttps://github.com/Dr-TSNG/Fuck-Location"))
         items.add(Line())
-        items.add(Card("Telegram\nhttps://t.me/HideMyApplist"))
+        items.add(Card("Telegram\nhttps://t.me/FuckLocation"))
         items.add(Line())
-        items.add(Card("Play store\nhttps://play.google.com/store/apps/details?id=com.tsng.hidemyapplist"))
+        items.add(Card("Play store\nhttps://play.google.com/store/apps/details?id=apk.fucklocation"))
 
         items.add(Category(getString(R.string.about_open_source)))
         items.add(License("MultiType", "drakeet", License.APACHE_2, "https://github.com/drakeet/MultiType"))
