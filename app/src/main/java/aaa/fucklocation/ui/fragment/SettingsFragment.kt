@@ -222,13 +222,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 }
             }
 
-            findPreference<Preference>("translation")?.let {
-                it.summary = getString(R.string.settings_translate_summary, getString(R.string.app_name))
-                it.setOnPreferenceClickListener {
-                    startActivity(Intent(Intent.ACTION_VIEW, Constants.TRANSLATE_URL.toUri()))
-                    true
-                }
-            }
+
 
             findPreference<SwitchPreference>("followSystemAccent")?.setOnPreferenceChangeListener { _, _ ->
                 activity?.recreate()

@@ -8,10 +8,6 @@
             android:key="language"
             android:summary="%s"
             android:title="@string/settings_language" />
-        <Preference
-            android:icon="@drawable/outline_translate_24"
-            android:key="translation"
-            android:title="@string/settings_translate" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_theme">
