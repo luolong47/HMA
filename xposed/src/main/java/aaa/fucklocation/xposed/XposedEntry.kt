@@ -18,15 +18,37 @@ import aaa.fucklocation.xposed.hook.GnssManagerServiceHookerS
 import aaa.fucklocation.xposed.hook.CellLocationHookerS
 import kotlin.concurrent.thread
 
+/** 日志标签 */
 private const val TAG = "HMA-XposedEntry"
 
+/**
+ * Xposed入口类
+ * 
+ * 该类实现了IXposedHookZygoteInit和IXposedHookLoadPackage接口，
+ * 负责在系统启动时初始化Hook，并根据不同的包名应用不同的Hook策略
+ */
 @Suppress("unused")
 class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
 
+    /**
+     * 初始化Zygote进程
+     * 
+     * @param startupParam 启动参数
+     */
     override fun initZygote(startupParam: IXposedHookZygoteInit.StartupParam) {
         EzXHelperInit.initZygote(startupParam)
     }
 
+    /**
+     * 处理包加载事件
+     * 
+     * 根据不同的包名应用不同的Hook策略：
+     * - 主应用包：标记为已Hook
+     * - 系统包：注册用户服务并初始化位置Hook
+     * - 电话包：初始化基站定位Hook
+     * 
+     * @param lpparam 加载包参数
+     */
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         if (lpparam.packageName == Constants.APP_PACKAGE_NAME) {
             EzXHelperInit.initHandleLoadPackage(lpparam)
@@ -68,6 +90,15 @@ class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
         }
     }
 
+    /**
+     * 初始化位置相关的Hook
+     * 
+     * 根据Android版本初始化相应的位置Hook，包括：
+     * - LocationHookerAfterS：Android 12+的位置Hook
+     * - GnssManagerServiceHookerS：GNSS管理服务Hook
+     * 
+     * @param lpparam 加载包参数
+     */
     private fun initLocationHooks(lpparam: XC_LoadPackage.LoadPackageParam) {
         logI(TAG, "Initializing Location Hooks for Android ${Build.VERSION.SDK_INT}")
 

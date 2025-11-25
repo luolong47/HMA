@@ -18,21 +18,44 @@ import aaa.fucklocation.common.JsonConfig
 import kotlin.random.Random
 import java.lang.reflect.Method
 
+/** 日志标签 */
 private const val TAG = "LocationHookerAfterS"
 
+/**
+ * Android 12+位置Hook类
+ * 
+ * 该类实现了IFrameworkHook接口，负责Hook Android 12及以上版本的位置相关方法，
+ * 包括位置报告、位置获取、GNSS回调注册等功能，以实现位置模拟
+ */
 @SuppressLint("PrivateApi")
 class LocationHookerAfterS : IFrameworkHook {
+    /** Hook列表，用于存储所有已安装的Hook */
     private var hooks = mutableListOf<XC_MethodHook.Unhook>()
 
     override fun load() {
         // 在这里实现加载逻辑，但实际使用 initHooks
     }
 
+    /**
+     * 卸载所有Hook
+     */
     override fun unload() {
         hooks.forEach { it.unhook() }
         hooks.clear()
     }
 
+    /**
+     * 初始化Hook
+     * 
+     * 安装所有必要的位置相关Hook，包括：
+     * - LocationProviderManager的onReportLocation方法
+     * - LocationManagerService的getLastLocation方法
+     * - LocationManagerService的getCurrentLocation方法
+     * - GNSS状态和NMEA回调注册方法
+     * - 地理围栏请求方法
+     * 
+     * @param lpparam 加载包参数
+     */
     fun initHooks(lpparam: XC_LoadPackage.LoadPackageParam) {
         try {
             // Hook LocationProviderManager 的 onReportLocation 方法
@@ -133,6 +156,14 @@ class LocationHookerAfterS : IFrameworkHook {
         }
     }
 
+    /**
+     * Hook位置报告方法
+     * 
+     * 拦截位置报告，对白名单中的应用应用伪造位置
+     * 
+     * @param clazz LocationProviderManager类
+     * @param param 方法Hook参数
+     */
     private fun hookOnReportLocation(clazz: Class<*>, param: XC_MethodHook.MethodHookParam) {
         logI(TAG, "in onReportLocation!")
 
@@ -186,6 +217,14 @@ class LocationHookerAfterS : IFrameworkHook {
         }
     }
 
+    /**
+     * 从调用者身份获取包名
+     * 
+     * 根据不同类型的身份对象提取包名信息
+     * 
+     * @param identity 调用者身份对象
+     * @return 包名字符串，如果无法获取则返回"unknown"
+     */
     private fun getPackageNameFromIdentity(identity: Any?): String {
         // 这里应该实现从调用者身份获取包名的逻辑
         // 简化实现，实际应该根据不同 Android 版本使用不同的方法
@@ -205,6 +244,14 @@ class LocationHookerAfterS : IFrameworkHook {
         }
     }
 
+    /**
+     * 检查包是否在白名单中
+     * 
+     * 判断指定包是否应该被Hook，包括检查系统保护包、应用自身包和用户配置
+     * 
+     * @param packageName 要检查的包名
+     * @return 如果包在白名单中返回true，否则返回false
+     */
     private fun isInWhitelist(packageName: String): Boolean {
         // 首先检查是否是系统关键包，这些包不应该被 Hook
         if (packageName in Constants.packagesShouldNotHide) {
@@ -234,6 +281,16 @@ class LocationHookerAfterS : IFrameworkHook {
         return isHookEnabled
     }
 
+    /**
+     * 创建伪造位置
+     * 
+     * 根据配置的模板创建伪造位置，保留原始位置的其他属性，
+     * 并添加随机偏移以增加真实性
+     * 
+     * @param originLocation 原始位置，可为null
+     * @param packageName 请求位置的包名
+     * @return 伪造的位置对象
+     */
     private fun createFakeLocation(originLocation: Location?, packageName: String): Location {
         // 这里应该实现创建伪造位置的逻辑
         // 通过 AIDL 从配置中读取伪造位置

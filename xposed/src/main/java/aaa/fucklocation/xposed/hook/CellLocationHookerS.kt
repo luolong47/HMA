@@ -11,21 +11,41 @@ import aaa.fucklocation.xposed.logI
 import aaa.fucklocation.common.Constants
 import aaa.fucklocation.common.JsonConfig
 
+/** 日志标签 */
 private const val TAG = "CellLocationHookerS"
 
+/**
+ * 基站位置Hook类
+ * 
+ * 该类实现了IFrameworkHook接口，负责Hook Android 12及以上版本的基站位置相关方法，
+ * 包括获取基站位置、请求网络位置更新等，以实现基站位置模拟
+ */
 @SuppressLint("PrivateApi")
 class CellLocationHookerS : IFrameworkHook {
+    /** Hook列表，用于存储所有已安装的Hook */
     private var hooks = mutableListOf<XC_MethodHook.Unhook>()
 
     override fun load() {
         // 在这里实现加载逻辑，但实际使用 initHooks
     }
 
+    /**
+     * 卸载所有Hook
+     */
     override fun unload() {
         hooks.forEach { it.unhook() }
         hooks.clear()
     }
 
+    /**
+     * 初始化Hook
+     * 
+     * 安装所有必要的基站位置相关Hook，包括：
+     * - PhoneInterfaceManager的getCellLocation方法
+     * - 其他基站位置相关方法
+     * 
+     * @param lpparam 加载包参数
+     */
     fun initHooks(lpparam: XC_LoadPackage.LoadPackageParam) {
         try {
             val phoneInterfaceManagerClass = lpparam.classLoader.loadClass("com.android.phone.PhoneInterfaceManager")
