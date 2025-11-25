@@ -107,7 +107,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         binding.backupConfig.setOnClickListener {
-            backupSAFLauncher.launch("HMA_Config.json")
+            backupSAFLauncher.launch("AFuckLocation_Config.json")
         }
         binding.restoreConfig.setOnClickListener {
             restoreSAFLauncher.launch("application/json")
