@@ -79,3 +79,5 @@ lint/tmp/
 *.hprof
 
 updates/
+
+.kotlin/

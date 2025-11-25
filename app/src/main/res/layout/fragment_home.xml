@@ -131,14 +131,7 @@
                             android:text="@string/home_manage"
                             android:textAppearance="?textAppearanceTitleMedium" />
 
-                        <aaa.fucklocation.ui.view.ListItemView
-                            android:id="@+id/detection_test"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:icon="@drawable/baseline_my_location_24"
-                            app:text="@string/home_detection_test" />
 
-                        <include layout="@layout/line" />
 
                         <aaa.fucklocation.ui.view.ListItemView
                             android:id="@+id/template_manage"

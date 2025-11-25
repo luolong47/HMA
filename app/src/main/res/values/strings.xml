@@ -39,9 +39,8 @@
     <string name="home_xposed_service_old">Module updated, need reboot</string>
     <string name="home_xposed_filter_count">Hide My Applist has filtered total %d requests</string>
     <string name="home_manage">Manage</string>
-    <string name="home_detection_test">Detection test</string>
-    <string name="home_download_test_app_title">Download test app</string>
-    <string name="home_download_test_app_message">We have developed an individual detection test app and migrated detection test to it. Do you want to download it now?</string>
+
+
     <string name="home_backup_and_restore">Backup &amp; Restore</string>
     <string name="home_backup_config">Backup config</string>
     <string name="home_restore_config">Restore config</string>

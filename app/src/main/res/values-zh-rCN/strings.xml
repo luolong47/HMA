@@ -36,9 +36,8 @@
     <string name="home_xposed_service_old">模块已更新，需要重启设备</string>
     <string name="home_xposed_filter_count">隐藏应用列表已经执行了 %d 次拦截</string>
     <string name="home_manage">管理</string>
-    <string name="home_detection_test">拦截测试</string>
-    <string name="home_download_test_app_title">下载拦截测试应用</string>
-    <string name="home_download_test_app_message">我们开发了一个独立的拦截测试应用，是否现在下载？</string>
+
+
     <string name="home_backup_and_restore">备份 &amp; 还原</string>
     <string name="home_backup_config">备份配置</string>
     <string name="home_restore_config">还原配置</string>
