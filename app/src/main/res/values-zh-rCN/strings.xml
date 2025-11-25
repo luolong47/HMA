@@ -82,8 +82,7 @@
     <string name="app_exclude_system_apps">排除系统应用</string>
     <string name="app_exclude_system_apps_summary">仅在必需时关闭此选项。禁用它很可能会导致崩溃</string>
     <string name="app_template_using">已启用 %d 个模板</string>
-    <string name="app_extra_apps_visible_count">%d 个额外可见的应用</string>
-    <string name="app_extra_apps_invisible_count">%d 个额外不可见的应用</string>
+
     <!-- Logs -->
     <string name="logs_save">保存日志</string>
     <string name="logs_clear">清除日志</string>

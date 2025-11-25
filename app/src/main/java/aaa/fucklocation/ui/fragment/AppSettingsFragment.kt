@@ -73,8 +73,6 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
         override fun getBoolean(key: String, defValue: Boolean): Boolean {
             return when (key) {
                 "enableHide" -> pack.enabled
-                "useWhiteList" -> pack.config.useWhitelist
-                "excludeSystemApps" -> pack.config.excludeSystemApps
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -82,8 +80,6 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
         override fun putBoolean(key: String, value: Boolean) {
             when (key) {
                 "enableHide" -> pack.enabled = value
-                "useWhiteList" -> pack.config.useWhitelist = value
-                "excludeSystemApps" -> pack.config.excludeSystemApps = value
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -99,11 +95,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 getString(R.string.app_template_using, pack.config.applyTemplates.size)
         }
 
-        private fun updateExtraAppList(useWhiteList: Boolean) {
-            findPreference<Preference>("extraAppList")?.title =
-                if (useWhiteList) getString(R.string.app_extra_apps_visible_count, pack.config.extraAppList.size)
-                else getString(R.string.app_extra_apps_invisible_count, pack.config.extraAppList.size)
-        }
+
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             preferenceManager.preferenceDataStore = AppPreferenceDataStore(pack)
@@ -113,16 +105,10 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 it.title = PackageHelper.loadAppLabel(pack.app)
                 it.summary = PackageHelper.loadPackageInfo(pack.app).packageName
             }
-            findPreference<SwitchPreference>("useWhiteList")?.setOnPreferenceChangeListener { _, newValue ->
-                pack.config.applyTemplates.clear()
-                pack.config.extraAppList.clear()
-                updateApplyTemplates()
-                updateExtraAppList(newValue as Boolean)
-                true
-            }
+
             findPreference<Preference>("applyTemplates")?.setOnPreferenceClickListener {
                 val templates = ConfigManager.getTemplateList().mapNotNull {
-                    if (it.isWhiteList == pack.config.useWhitelist) it.name else null
+                    it.name
                 }.toTypedArray()
                 val checked = templates.map {
                     pack.config.applyTemplates.contains(it)
@@ -140,22 +126,8 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                     .show()
                 true
             }
-            findPreference<Preference>("extraAppList")?.setOnPreferenceClickListener {
-                parent.setFragmentResultListener("app_select") { _, bundle ->
-                    pack.config.extraAppList = bundle.getStringArrayList("checked")!!.toMutableSet()
-                    updateExtraAppList(pack.config.useWhitelist)
-                    parent.clearFragmentResultListener("app_select")
-                }
 
-                val args = ScopeFragmentArgs(
-                    filterOnlyEnabled = false,
-                    checked = pack.config.extraAppList.toTypedArray()
-                )
-                parent.navController.navigate(R.id.nav_scope, args.toBundle())
-                true
-            }
             updateApplyTemplates()
-            updateExtraAppList(pack.config.useWhitelist)
         }
     }
 }
