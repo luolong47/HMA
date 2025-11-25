@@ -71,7 +71,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         searchDataDir()
         instance = this
         loadConfig()
-        installHooks()
+        // installHooks() - Hook installation has been disabled
         logI(TAG, "HMA服务已初始化")
     }
 
@@ -164,22 +164,13 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             if (it.flags and ApplicationInfo.FLAG_SYSTEM != 0) it.packageName else null
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            frameworkHooks.add(PmsHookTarget34(this))
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            frameworkHooks.add(PmsHookTarget33(this))
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            frameworkHooks.add(PmsHookTarget30(this))
-        } else {
-            frameworkHooks.add(PmsHookTarget28(this))
-        }
+        // PmsHookTarget classes have been removed
+        // Package filtering functionality is now handled elsewhere
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            frameworkHooks.add(PlatformCompatHook(this))
-        }
+        // PlatformCompatHook has been removed
 
-        frameworkHooks.forEach(IFrameworkHook::load)
-        logI(TAG, "Hook已安装")
+        // frameworkHooks.forEach(IFrameworkHook::load) - Hooks are disabled
+        logI(TAG, "Hook安装已禁用")
     }
 
     /**
@@ -222,8 +213,8 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             logcatAvailable = false
         }
         synchronized(configLock) {
-            frameworkHooks.forEach(IFrameworkHook::unload)
-            frameworkHooks.clear()
+            // frameworkHooks.forEach(IFrameworkHook::unload) - Hooks are disabled
+            // frameworkHooks.clear() - Hooks are disabled
             if (cleanEnv) {
                 logI(TAG, "清理运行环境")
                 File(dataDir).deleteRecursively()
@@ -264,7 +255,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
                 return
             }
             config = newConfig
-            frameworkHooks.forEach(IFrameworkHook::onConfigChanged)
+            // frameworkHooks.forEach(IFrameworkHook::onConfigChanged) - Hooks are disabled
         }
         logD(TAG, "配置已同步")
     }
