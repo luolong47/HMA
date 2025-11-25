@@ -144,15 +144,10 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         if ((caller == Constants.GMS_PACKAGE_NAME || caller == Constants.GSF_PACKAGE_NAME) && query == Constants.APP_PACKAGE_NAME) return false // If apply hide on gms, hma app will crash 😓
         if (caller == query) return false
         val appConfig = config.scope[caller] ?: return false
-        if (appConfig.useWhitelist && appConfig.excludeSystemApps && query in systemApps) return false
+        if (appConfig.excludeSystemApps && query in systemApps) return false
 
-        if (query in appConfig.extraAppList) return !appConfig.useWhitelist
-        for (tplName in appConfig.applyTemplates) {
-            val tpl = config.templates[tplName]!!
-            if (query in tpl.appList) return !appConfig.useWhitelist
-        }
-
-        return appConfig.useWhitelist
+        // 简化逻辑：只要包在配置中就启用 Hook
+        return true
     }
 
     override fun stopService(cleanEnv: Boolean) {
@@ -208,5 +203,12 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             logFile.renameTo(oldLogFile)
             logFile.createNewFile()
         }
+    }
+
+    override fun getTemplate(packageName: String): String {
+        val appConfig = config.scope[packageName] ?: return ""
+        val templateName = appConfig.applyTemplates.firstOrNull() ?: return ""
+        val template = config.templates[templateName] ?: return ""
+        return template.toString()
     }
 }

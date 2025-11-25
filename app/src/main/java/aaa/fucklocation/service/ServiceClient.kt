@@ -92,4 +92,8 @@ object ServiceClient : IHMAService, DeathRecipient {
     override fun stopService(cleanEnv: Boolean) {
         getServiceLegacy()?.stopService(cleanEnv)
     }
+
+    override fun getTemplate(packageName: String): String {
+        return getServiceLegacy()?.getTemplate(packageName) ?: ""
+    }
 }

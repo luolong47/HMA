@@ -66,8 +66,6 @@ class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
                 if (info.name == null) { // New template
                     if (name.isNullOrEmpty()) return
                     ConfigManager.updateTemplate(name, JsonConfig.Template(
-                        isWhitelist = info.isWhiteList,
-                        appList = emptySet(), // No target apps anymore
                         longitude = longitude,
                         latitude = latitude,
                         eciNci = eciNci,
@@ -83,11 +81,7 @@ class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
                     } else {
                         if (name.isEmpty()) name = info.name
                         if (name != info.name) ConfigManager.renameTemplate(info.name, name)
-                        // Get existing template to preserve appList
-                        val existingTemplate = ConfigManager.getTemplateTargetAppList(info.name)
                         ConfigManager.updateTemplate(name, JsonConfig.Template(
-                            isWhitelist = info.isWhiteList,
-                            appList = existingTemplate.toSet(), // Preserve existing appList
                             longitude = longitude,
                             latitude = latitude,
                             eciNci = eciNci,

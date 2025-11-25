@@ -73,7 +73,7 @@ object ConfigManager {
     }
 
     fun getTemplateList(): MutableList<TemplateInfo> {
-        return config.templates.mapTo(mutableListOf()) { TemplateInfo(it.key, it.value.isWhitelist) }
+        return config.templates.mapTo(mutableListOf()) { TemplateInfo(it.key, false) }
     }
 
     fun getTemplateAppliedAppList(name: String): ArrayList<String> {
@@ -83,7 +83,8 @@ object ConfigManager {
     }
 
     fun getTemplateTargetAppList(name: String): ArrayList<String> {
-        return ArrayList(config.templates[name]?.appList ?: emptyList())
+        // 由于 Template 不再包含 appList，返回空列表
+        return ArrayList()
     }
 
     fun deleteTemplate(name: String) {
@@ -108,7 +109,7 @@ object ConfigManager {
     }
 
     fun updateTemplate(name: String, template: JsonConfig.Template) {
-        Log.d(TAG, "updateTemplate: $name list = ${template.appList}")
+        Log.d(TAG, "updateTemplate: $name")
         config.templates[name] = template
         saveConfig()
     }

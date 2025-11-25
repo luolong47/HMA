@@ -13,4 +13,6 @@ interface IHMAService {
     String getLogs() = 4;
 
     void clearLogs() = 5;
+
+    String getTemplate(String packageName) = 6;
 }
